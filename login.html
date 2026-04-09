@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fine-Tuner Login</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --ft-navy: #23475d;
+      --ft-blue: #48a7cf;
+      --ft-muted: #8dabbb;
+      --ft-ice: #eefeff;
+      --ft-bg: #e9eff2;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(72, 167, 207, 0.16), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(141, 171, 187, 0.18), transparent 28%),
+        var(--ft-bg);
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--ft-navy);
+    }
+
+    .app-shell {
+      max-width: 1100px;
+      background-color: var(--ft-navy);
+      border-radius: 24px;
+      box-shadow: 0 20px 45px rgba(35, 71, 93, 0.18);
+    }
+
+    .top-strip {
+      background-color: var(--ft-ice);
+      border-radius: 18px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--ft-blue), var(--ft-muted));
+      color: white;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(35, 71, 93, 0.14);
+    }
+
+    .nav-pills .nav-link {
+      color: var(--ft-blue);
+      border-radius: 999px;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-pills .nav-link:hover {
+      background-color: rgba(72, 167, 207, 0.14);
+      color: var(--ft-navy);
+    }
+
+    .nav-pills .nav-link.active {
+      background-color: var(--ft-blue);
+      color: white;
+    }
+
+    .main-panel {
+      background-color: var(--ft-navy);
+      border-radius: 20px;
+    }
+
+    .info-panel {
+      background:
+        linear-gradient(135deg, rgba(72, 167, 207, 0.18), rgba(141, 171, 187, 0.12)),
+        var(--ft-navy);
+      color: white;
+      border: 1px solid rgba(238, 254, 255, 0.12);
+      border-radius: 20px;
+      min-height: 100%;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background-color: rgba(238, 254, 255, 0.12);
+      border: 1px solid rgba(238, 254, 255, 0.15);
+      font-size: 0.85rem;
+    }
+
+    .feature-box {
+      background-color: rgba(238, 254, 255, 0.10);
+      border: 1px solid rgba(238, 254, 255, 0.12);
+      border-radius: 16px;
+      height: 100%;
+    }
+
+    .mini-mock {
+      background-color: rgba(238, 254, 255, 0.10);
+      border: 1px solid rgba(238, 254, 255, 0.12);
+      border-radius: 18px;
+    }
+
+    .mini-bar,
+    .mini-card {
+      background-color: rgba(238, 254, 255, 0.14);
+      border-radius: 12px;
+    }
+
+    .mini-bar {
+      height: 42px;
+    }
+
+    .mini-card {
+      height: 110px;
+    }
+
+    .form-panel {
+      background-color: var(--ft-muted);
+      border-radius: 20px;
+    }
+
+    .login-card {
+      background-color: var(--ft-ice);
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(35, 71, 93, 0.12);
+    }
+
+    .form-control {
+      border-radius: 12px;
+      border: 1px solid rgba(35, 71, 93, 0.14);
+      padding: 0.8rem 0.9rem;
+    }
+
+    .form-control:focus {
+      border-color: var(--ft-blue);
+      box-shadow: 0 0 0 0.25rem rgba(72, 167, 207, 0.15);
+    }
+
+    .btn-ft-primary {
+      background-color: var(--ft-navy);
+      border-color: var(--ft-navy);
+      color: white;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .btn-ft-primary:hover {
+      background-color: #1c3b4d;
+      border-color: #1c3b4d;
+      color: white;
+    }
+
+    .btn-ft-secondary {
+      background-color: rgba(72, 167, 207, 0.14);
+      border: 1px solid rgba(72, 167, 207, 0.22);
+      color: var(--ft-navy);
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .btn-ft-secondary:hover {
+      background-color: rgba(72, 167, 207, 0.22);
+      color: var(--ft-navy);
+    }
+
+    .text-ft-blue {
+      color: var(--ft-blue) !important;
+    }
+
+    .small-note {
+      color: rgba(35, 71, 93, 0.68);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 991.98px) {
+      .info-panel,
+      .form-panel {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4 py-md-5">
+    <div class="app-shell mx-auto p-3 p-md-4">
+      <!-- Top nav -->
+      <div class="top-strip px-3 px-md-4 py-3 mb-3">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center gap-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="brand-badge">♪</div>
+            <div>
+              <h1 class="h5 mb-1 fw-bold">Fine-Tuner</h1>
+              <p class="mb-0 text-secondary small">Music discovery tailored to your taste</p>
+            </div>
+          </div>
+
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">User Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Get Recommendations</a></li>
+            <li class="nav-item"><a class="nav-link active" href="#">Login</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="main-panel p-2 p-md-3">
+        <div class="row g-3">
+          <!-- Left info side -->
+          <div class="col-lg-7">
+            <div class="info-panel p-4 p-md-5 h-100">
+              <div>
+                <span class="eyebrow mb-3">Welcome back</span>
+                <h2 class="display-6 fw-bold mb-3">Tune your next favorite song.</h2>
+                <p class="mb-4 text-white-50" style="max-width: 42rem;">
+                  Log in to save favorite tracks, view your listening profile,
+                  explore personalized recommendations, and build playlists
+                  that match your sound and vibe.
+                </p>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-md-4">
+                    <div class="feature-box p-3">
+                      <h3 class="h6 fw-bold">Smart Picks</h3>
+                      <p class="mb-0 small text-white-50">
+                        Recommendations based on songs and artists you already enjoy.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="feature-box p-3">
+                      <h3 class="h6 fw-bold">Your Stats</h3>
+                      <p class="mb-0 small text-white-50">
+                        View genre, artist, and listening-pattern summaries.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="feature-box p-3">
+                      <h3 class="h6 fw-bold">Playlists</h3>
+                      <p class="mb-0 small text-white-50">
+                        Organize recommended songs into playlists you can refine.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-mock p-3 mt-2">
+                <div class="d-flex gap-2 mb-3">
+                  <span class="rounded-circle bg-light bg-opacity-50" style="width:10px;height:10px;"></span>
+                  <span class="rounded-circle bg-light bg-opacity-50" style="width:10px;height:10px;"></span>
+                  <span class="rounded-circle bg-light bg-opacity-50" style="width:10px;height:10px;"></span>
+                </div>
+                <div class="mini-bar mb-3"></div>
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <div class="mini-card"></div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mini-card"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right form side -->
+          <div class="col-lg-5">
+            <div class="form-panel p-3 p-md-4 h-100 d-flex align-items-center">
+              <div class="login-card p-4 p-md-4 w-100">
+                <h2 class="h2 fw-bold mb-2">Log In</h2>
+                <p class="text-secondary mb-4">
+                  Enter your account details to continue to your profile,
+                  recommendations, and saved playlists.
+                </p>
+
+                <form>
+                  <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                    />
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="rememberMe" />
+                      <label class="form-check-label" for="rememberMe">
+                        Remember me
+                      </label>
+                    </div>
+                    <a href="#" class="text-decoration-none text-ft-blue fw-semibold">Forgot password?</a>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-ft-primary py-2">
+                      Log In
+                    </button>
+                    <button type="button" class="btn btn-ft-secondary py-2">
+                      Continue with Spotify
+                    </button>
+                  </div>
+
+                  <hr class="my-4" />
+
+                  <p class="text-center mb-2">
+                    New to Fine-Tuner?
+                    <a href="#" class="text-decoration-none text-ft-blue fw-semibold">Create an account</a>
+                  </p>
+
+                  <p class="small-note text-center mb-0">
+                    Front-end only for now. Replace links and form actions with your Django routes later.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+</body>
+</html>
